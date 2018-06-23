@@ -1,6 +1,16 @@
 # Golang workspace environment
 
-This directory contains a Golang [workspace](https://golang.org/doc/code.html#Workspaces) environment used to develop and test my project.
+This directory contains a Golang application auto build versioning example.
+
+This example is based on [goworkspace](https://github.com/harobed/goworkspace) build environment.
+
+```
+$ ./bin/darwin_amd64/myproject version
+Version: master
+UTC Build Time: 2018-06-23_04:18:27PM
+Git Commit Hash: 5e980301d3e3e401473e7b8d7eb4d295d34111e2
+Git Commit Date: 2018-06-23_17:54:06_+0200
+```
 
 
 ## Prerequisite
@@ -16,33 +26,18 @@ $ brew cask install docker
 
 ## Usage
 
+Build the project:
+
 ```
 $ make up-and-build
 ```
 
-Launch project:
+Version output example:
 
 ```
-$ bin/darwin_amd64/myproject --help
-A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.
+$ ./bin/darwin_amd64/myproject version
+Version: master
+UTC Build Time: 2018-06-23_04:18:27PM
+Git Commit Hash: 5e980301d3e3e401473e7b8d7eb4d295d34111e2
+Git Commit Date: 2018-06-23_17:54:06_+0200
 ```
-
-Some Makefile commands:
-
-* `make enter`: Enter in `goworkspace` Docker container
-* `make godep`: install Golang dependencies
-* `make godep-ensure`: to update `Gopkg.toml` with package used in your project
-* `make build`: build your project
-* `make gox`: build multiplatform binaries
-* `make build-goworkspace-docker-image`: to rebuild `goworkspace` Docker image
-* `make lint`: execute Golang [Linter](https://github.com/alecthomas/gometalinter)
-
-
-## How to contribute
-
-See some guidelines in [contribute document](CONTRIBUTE.md).
