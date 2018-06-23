@@ -1,5 +1,5 @@
 DOCKER_ENV=$(shell test ! -f /.dockerenv; echo "$$?")
-GOLDFLAGS="-X myproject/version.BuildStamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'` -X myproject/version.GitHash=`git rev-parse HEAD`"
+GOLDFLAGS="-X myproject/version.BuildStamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'` -X myproject/version.GitHash=`git rev-parse HEAD` -X myproject/version.Version=`git rev-parse --abbrev-ref HEAD` -X myproject/version.GitDate=`git show -s --format=%ci | sed "s/ /_/g"`"
 
 assert_in_docker:
 ifeq ($(DOCKER_ENV),0)
@@ -37,7 +37,7 @@ build:
 ifeq ($(DOCKER_ENV),0)
 	docker-compose exec goworkspace make -C . build
 else
-	go build -v -o bin/myproject -i myproject/
+	go build -v -ldflags $(GOLDFLAGS) -o bin/myproject -i myproject/
 endif
 
 .PHONY: gox
@@ -49,7 +49,7 @@ else
 		-os="darwin linux" \
 		-arch="amd64" \
 		-output "bin/{{.OS}}_{{.Arch}}/myproject" \
-		-ldflags "$(GOLDFLAGS)" \
+		-ldflags $(GOLDFLAGS) \
 		myproject/
 endif
 

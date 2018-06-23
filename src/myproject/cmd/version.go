@@ -13,10 +13,11 @@ var versionCmd = &cobra.Command{
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Printf(
-			"Version: %s\nUTC Build Time: %s\nGit Commit Hash: %s\n",
+			"Version: %s\nUTC Build Time: %s\nGit Commit Hash: %s\nGit Commit Date: %s\n",
 			version.Version,
 			version.BuildStamp,
 			version.GitHash,
+			version.GitDate,
 		)
 	},
 }
